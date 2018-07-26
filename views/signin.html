@@ -28,43 +28,23 @@
             </div>
             <div class="checkbox">
                 <label>
-          <input type="checkbox">记住我
-        </label>
+                    <input type="checkbox">记住我
+                </label>
             </div>
             <button type="submit" class="btn btn-success btn-block">登录</button>
         </form>
         <div class="message">
-            <p>没有账号? <a href="/signup">点击创建</a>.</p>
+            <p>没有账号?
+                <a href="/signup">点击创建</a>.</p>
         </div>
     </div>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script>
-        $('#signin_form').on('submit',function(e){
-            e.preventDefault();
-            const formData = $(this).serialize();  
-            console.log(formData);
-             
-            $.post("/handleSignin", formData, (function(data) {
-                console.log(data);
-                switch (data.code) {
-                    case 500:
-                        alert(data.message);
-                        break;
-                    case 1:
-                        alert(data.message);
-                        break;
-                    case 2:
-                        alert(data.message);
-                        break;
-                    case 200:
-                        // 跳转到文章列表页
-                        window.location.href = "/";
-                        break;
-                    default:
-                        break;
-                }
-            }));
-        })
+        // $('#signin_form').on('submit', (e) => {
+        //     e.preventDefault();
+        //     const formData = $(this).serialize();
+        //     $.post('/')
+        // })
     </script>
 </body>
 
