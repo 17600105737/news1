@@ -1,11 +1,6 @@
-// 处理函数
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
-    database: 'news'
-})
+// 处理函数 ---控制器
+const M_user = require('../models/m_user');
+
 // 渲染页面
 exports.showIndex = (req, res) => {
     res.render('signin.html');
@@ -13,8 +8,7 @@ exports.showIndex = (req, res) => {
 // 登录邮箱验证
 exports.handleSignin = (req, res) => {
     const body = req.body;
-    const sqlstr = "SELECT * FROM `users` WHERE `email`= ?";
-    connection.query(sqlstr, body.email, (err, results) => {
+    M_user.checkEmail(body.email, (err, results) => {
         if (err) {
             return res.send({
                 code: 500,
@@ -35,10 +29,12 @@ exports.handleSignin = (req, res) => {
                 message: '密码错误'
             })
         }
-
+        req.session.user = results[0];
+        // console.log(req.session.user);
+        
         res.send({
-            code:200,
-            message:'可以登录'
+            code: 200,
+            message: '可以登录'
         })
     })
 }
