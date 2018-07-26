@@ -40,11 +40,29 @@
     </div>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script>
-        // $('#signin_form').on('submit', (e) => {
-        //     e.preventDefault();
-        //     const formData = $(this).serialize();
-        //     $.post('/')
-        // })
+        $('#signin_form').on('submit', function(e) {
+            e.preventDefault();
+            const formData = $(this).serialize();
+            
+            $.post('/handleSignin', formData, (function (data) {
+                switch (data.code) {
+                    case 500:
+                        alert(data.message);
+                        break;
+                    case 1:
+                        alert(data.message);
+                        break;
+                    case 2:
+                        alert(data.message);
+                        break;
+                    case 200:
+                        window.location.href ='/';
+                        break;
+                    default:
+                        break;
+                }
+            }))
+        })
     </script>
 </body>
 
